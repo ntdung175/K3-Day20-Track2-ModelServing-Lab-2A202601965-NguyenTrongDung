@@ -160,19 +160,23 @@ lại rất hợp với cơ chế của llama.cpp trên model này.
 > Bỏ trống nếu không làm. Xem `bonus/README.md`. Đừng làm hết — **một** finding sâu
 > ăn điểm hơn năm bảng nông.
 
-**Đã làm:** _<B1 build-compare / B2 sweep nào / B4 challenge nào / B5 lựa chọn nào>_
+**Đã làm:** B5 C8 semantic cache (offline diagnostic)
 
 **Numbers:**
 
 ```
-before:  <số>
-after:   <số>
-speedup: <X.Y>×
+false hit: sim 0.408 ở threshold 0.35
+false miss: sim 0.000 ở threshold 0.85
+speedup: n/a — đây là chẩn đoán threshold, không phải speedup
 ```
 
 **Điều này nói lên gì mà deck chưa nói:**
 
-_(để trống nếu bạn không làm phần này)_
+Semantic cache chỉ hữu ích nếu embedding đủ tốt. Với embedder yếu kiểu bag-of-words
+hoặc decoder-state pooling, threshold thấp sẽ kéo cả prompt không liên quan vào cache,
+còn threshold cao thì vẫn bỏ sót paraphrase thật. Vì vậy, không có một ngưỡng chung nào
+giải quyết được cả false hit lẫn false miss trên stream này; thứ cần chỉnh trước là
+chất lượng embedding, rồi mới đến threshold.
 
 ---
 
