@@ -7,7 +7,7 @@
 > `make verify` sẽ fail nếu còn placeholder chưa điền. Đó là cố ý.
 
 **Họ Tên:** Nguyễn Trọng Dũng
-**Cohort:** K3
+**Cohort:** A20-K3
 **Ngày submit:** 2026-08-20
 
 ---
@@ -27,9 +27,8 @@
 - **Quantization:** UD-Q4_K_XL + UD-Q2_K_XL (từ `models/active.json`)
 
 **Chạy ở đâu:** laptop của tôi
-_(Nếu dùng cloud fallback: nói rõ vì sao — RAM < 8 GB, setup fail, v.v. Không mất điểm.)_
 
-**Setup story** (≤ 80 chữ): điều gì cần thay đổi để lab chạy trên máy bạn? Có bước
+**Setup story**: điều gì cần thay đổi để lab chạy trên máy bạn? Có bước
 nào fail rồi phải workaround không?
 
 Chạy local trên MacBook Pro M2 16 GB, dùng model mặc định Gemma 4 E2B. `make setup`
@@ -182,9 +181,14 @@ chất lượng embedding, rồi mới đến threshold.
 
 ## 7. Điều làm bạn ngạc nhiên nhất  *(optional)*
 
-_(1–2 câu. Không bắt buộc, nhưng grader đọc hết.)_
+Điều làm mình bất ngờ nhất là tăng số thread không làm model nhanh hơn, mà `-t 1`
+lại là điểm tốt nhất trên máy mình. Lúc đầu mình nghĩ máy có 8 core vật lý thì dùng
+nhiều thread hơn sẽ tốt hơn, nhưng số đo cho thấy bottleneck nằm ở tranh chấp tài
+nguyên và memory bandwidth chứ không phải thiếu thread.
 
-_(để trống nếu bạn không làm phần này)_
+Mình cũng hơi bất ngờ khi load test 50 users làm P95 tăng rất mạnh trong khi RPS gần
+như không tăng thêm. Nhìn số đó mình mới thấy phần chậm thêm chủ yếu là queue time,
+không phải model tự nhiên decode chậm đi.
 
 ---
 
